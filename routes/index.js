@@ -74,18 +74,14 @@ router.post('/timer', function (req, res, next) {
 
   });
 
-  let timerInterval = setInterval(() => {
-    sendUpdate(channel, `There are ${moment().to(timerEnd)} remaining.`, timerMessageTimeStamp, function (error, response, body) {
-      console.log('error:', error); // Print the error if one occurred
-      console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-      console.log('body:', body); // Print the HTML for the Google homepage.  
-    });
-  }, 1000)
+  // let timerInterval = setInterval(() => {
+  //   sendUpdate(channel, `There are ${moment().to(timerEnd)} remaining.`, timerMessageTimeStamp, function (error, response, body) {
+  //     console.log('error:', error); // Print the error if one occurred
+  //     console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+  //     console.log('body:', body); // Print the HTML for the Google homepage.  
+  //   });
+  // }, 1000)
 
-  // setTimeout(() => {
-
-  //   res.status(200).send({ "text": "in timeout function!" });
-  // }, 1000);
 });
 
 module.exports = router;
