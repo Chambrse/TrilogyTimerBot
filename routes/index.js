@@ -3,16 +3,19 @@ var router = express.Router();
 var request = require('request');
 
 /* GET home page. */
-router.post('/', function(req, res, next) {
+router.post('/', function (req, res, next) {
   console.log(req.headers);
   console.log(req.body);
 
   res.status(200).send({ "challenge": req.body.challenge });
 });
 
-router.post('/timer', function(req, res, next) {
+router.post('/timer', function (req, res, next) {
+  console.log(process.env.SLACK_TOKEN);
   console.log(req.headers);
   console.log(req.body);
+  res.status(200).send({ "text": "Timer Started." });
+
 
   let test = setTimeout(function () {
     console.log('the timeout is happening');
@@ -41,7 +44,7 @@ router.post('/timer', function(req, res, next) {
   }, 3000);
 
   // setTimeout(() => {
-    
+
   //   res.status(200).send({ "text": "in timeout function!" });
   // }, 1000);
 });
