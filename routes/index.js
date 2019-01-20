@@ -4,7 +4,7 @@ var router = express.Router();
 /* GET home page. */
 router.post('/', function(req, res, next) {
   console.log(req);
-  res.status(200).send({ "text": "got it" });
+  res.status(200).send({ "challenge": req.body.challenge });
 });
 
 router.post('/timer', function(req, res, next) {
