@@ -37,7 +37,7 @@ router.post('/timer', function (req, res, next) {
   console.log(req.headers);
   console.log(req.body);
   res.status(200).send({ "text": "Timer Started." });
-
+  console.log(req.body.channel);
   sendMessage(req.body.channel, "Time Remaining", function (error, response, body) {
     console.log('error:', error); // Print the error if one occurred
     console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
