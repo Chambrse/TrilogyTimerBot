@@ -38,11 +38,11 @@ router.post('/timer', function (req, res, next) {
   console.log(req.body);
   res.status(200).send({ "text": "Timer Started." });
 
-  sendMessage(req.body.channel, "Time Remaining", function (error, response, body) {
-    console.log('error:', error); // Print the error if one occurred
-    console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-    console.log('body:', body); // Print the HTML for the Google homepage.
-  })
+  // sendMessage(req.body.channel, "Time Remaining", function (error, response, body) {
+  //   console.log('error:', error); // Print the error if one occurred
+  //   console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+  //   console.log('body:', body); // Print the HTML for the Google homepage.
+  // })
 
   let test = setTimeout(function () {
     console.log('the timeout is happening');
