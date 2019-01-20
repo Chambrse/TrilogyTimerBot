@@ -1,7 +1,8 @@
+// require('dotenv').config()
 var express = require('express');
 var router = express.Router();
 var request = require('request');
-
+console.log(process.env.SLACK_TOKEN);
 /* GET home page. */
 router.post('/', function (req, res, next) {
   console.log(req.headers);
