@@ -2,6 +2,7 @@
 var express = require('express');
 var router = express.Router();
 let timer = require('../controllers/timer');
+let slack = require('../controllers/messages');
 
 /* GET home page. */
 router.post('/', function (req, res, next) {
