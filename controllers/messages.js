@@ -21,6 +21,21 @@ function sendMessage(channel, text, cb) {
     request.post(options, cb);
 }
 
+function sendMessageNew( body, cb) {
+
+    var options = {
+        url: 'https://slack.com/api/chat.postMessage',
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${process.env.SLACK_TOKEN}`
+        },
+        body: body
+    };
+
+    request.post(options, cb);
+}
+
 function sendUpdate(channel, text, timestamp, cb) {
     let body = JSON.stringify({
         'channel': channel,
@@ -45,5 +60,6 @@ function sendUpdate(channel, text, timestamp, cb) {
 
 module.exports = {
     sendMessage: sendMessage,
-    sendUpdate: sendUpdate
+    sendUpdate: sendUpdate,
+    sendMessageNew: sendMessageNew
 }

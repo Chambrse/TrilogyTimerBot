@@ -16,6 +16,7 @@ function startTimer(channel, minutes) {
     });
 
     let timerInterval = setInterval(() => {
+        console.log(timerEnd.diff(moment()));
         let currentDuration = moment.duration(timerEnd.diff(moment()));
         slack.sendUpdate(channel, `${currentDuration.minutes()}:${currentDuration.seconds()} remaining.`, timerMessageTimeStamp, function (error, response, body) {
             console.log('body:', body); // Print the HTML for the Google homepage.  
