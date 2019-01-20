@@ -15,8 +15,7 @@ router.post('/iGetIt', function (req, res, next) {
   console.log(req.headers);
   console.log(req.body);
 
-  res.status(200).send();
-
+  
   let body = JSON.stringify({
     'channel': req.body.channel_id,
     'as_user': 'false',
@@ -45,13 +44,14 @@ router.post('/iGetIt', function (req, res, next) {
       }
     ]
   });
-
+  
   slack.sendMessageNew(body, function (error, response, body) {
     console.log('body:', body); // Print the HTML for the Google homepage.
-
+    
     console.log(JSON.parse(body, null, 2).ts);
-
+    
   });
+  res.status(200).send();
 
 });
 
