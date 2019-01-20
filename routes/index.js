@@ -28,7 +28,7 @@ function sendMessage(channel, text, cb) {
     body: body
   };
 
-  request.post(options, cb(error, response, body));
+  request.post(options, cb);
 }
 
 
