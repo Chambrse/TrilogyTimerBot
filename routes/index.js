@@ -2,6 +2,7 @@
 var express = require('express');
 var router = express.Router();
 var request = require('request');
+var moment = require('moment');
 /* GET home page. */
 router.post('/', function (req, res, next) {
   console.log(req.headers);
@@ -58,29 +59,30 @@ function sendUpdate(channel, text, timestamp, cb) {
 router.post('/timer', function (req, res, next) {
   console.log(req.headers);
   console.log(req.body);
-  res.status(200).send({ "text": "Timer Started." });
-
-  const timerMessageTimeStamp = null;
+  
+  let timerMessageTimeStamp = null;
   const minutes = parseInt(req.body.text);
   const timerEnd = moment().add(minutes, 'minutes');
   const channel = req.body.channel_id;
-
-  sendMessage(channel, `There are ${moment().to(timerEnd)} remaining.`, function (error, response, body) {
+  
+  sendMessage(channel, `There are ${moment(timerEnd.diff(moment())).format("hh:mm:ss")} remaining.`, function (error, response, body) {
     console.log('error:', error); // Print the error if one occurred
     console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
     console.log('body:', body); // Print the HTML for the Google homepage.
-
-    timerMessageTimeStamp = body.ts;
-
+    
+    console.log(JSON.parse(body, null ,2).ts);
+    timerMessageTimeStamp = JSON.parse(body, null ,2).ts;
+    
   });
+  res.status(200).send({ "text": "Timer Started." });
 
-  // let timerInterval = setInterval(() => {
-  //   sendUpdate(channel, `There are ${moment().to(timerEnd)} remaining.`, timerMessageTimeStamp, function (error, response, body) {
-  //     console.log('error:', error); // Print the error if one occurred
-  //     console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-  //     console.log('body:', body); // Print the HTML for the Google homepage.  
-  //   });
-  // }, 1000)
+  let timerInterval = setInterval(() => {
+    sendUpdate(channel, `There are ${moment(timerEnd.diff(moment())).format("hh:mm:ss")} remaining`, timerMessageTimeStamp, function (error, response, body) {
+      console.log('error:', error); // Print the error if one occurred
+      console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+      console.log('body:', body); // Print the HTML for the Google homepage.  
+    });
+  }, 1000)
 
 });
 
