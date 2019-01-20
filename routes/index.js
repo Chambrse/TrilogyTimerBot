@@ -11,6 +11,13 @@ router.post('/', function (req, res, next) {
   res.status(200).send({ "challenge": req.body.challenge });
 });
 
+router.post('/iGetIt', function (req, res, next) {
+  console.log(req.headers);
+  console.log(req.body);
+
+  res.status(200).send({ "challenge": req.body.challenge });
+});
+
 router.post('/timer', function (req, res, next) {
   console.log(req.headers);
   console.log(req.body);
@@ -22,7 +29,6 @@ router.post('/timer', function (req, res, next) {
 
   res.status(200).send({ "text": "Timer Started." });
 
-  
 });
 
 module.exports = router;
