@@ -60,7 +60,7 @@ router.post('/timer', function (req, res, next) {
   console.log(req.body);
   res.status(200).send({ "text": "Timer Started." });
 
-  const timerMessageTimeStamp;
+  const timerMessageTimeStamp = null;
   const minutes = parseInt(req.body.text);
   const timerEnd = moment().add(minutes, 'minutes');
   const channel = req.body.channel_id;
@@ -81,7 +81,7 @@ router.post('/timer', function (req, res, next) {
       console.log('body:', body); // Print the HTML for the Google homepage.  
     });
   }, 1000)
-  
+
   // setTimeout(() => {
 
   //   res.status(200).send({ "text": "in timeout function!" });
