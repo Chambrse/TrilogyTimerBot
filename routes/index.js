@@ -60,36 +60,49 @@ router.post('/actions', function (req, res, next) {
   console.log(req.headers);
   console.log(req.body);
 
-  res.status(200).send({
-    'channel': req.body.channel_id,
-    'as_user': 'false',
-    'username': 'Trilogy_Timer',
-    "text": "Please rate your comprehension of this topic.",
-    "attachments": [{
-      "text": "someone responded to thise message."
-    },
-    {
-      "fallback": "Something Happened.",
-      "callback_id": "ComprehensionRating",
-      "color": "#3AA3E3",
-      "attachment_type": "default",
-      "actions": [
-        {
-          "name": "I Get It",
-          "text": "I get it!",
-          "type": "button",
-          "value": "iGetIt"
-        },
-        {
-          "name": "I Don't Get It",
-          "text": "What?",
-          "type": "button",
-          "value": "iDontGetIt"
-        }
-      ]
-    }
-    ]
-  });
+  let action = req.body.payload.actions[0].name;
+  let prevMsg = JSON.parse(req.body.payload.original_message);
+
+  switch (action) {
+    case "I Get It":
+      prevMsg.text = "i changed the text";
+      res.status(200).send(prevMsg);
+      break;
+
+    default:
+      break;
+  }
+
+  // res.status(200).send({
+  //   'channel': req.body.channel_id,
+  //   'as_user': 'false',
+  //   'username': 'Trilogy_Timer',
+  //   "text": "Please rate your comprehension of this topic.",
+  //   "attachments": [{
+  //     "text": "someone responded to thise message."
+  //   },
+  //   {
+  //     "fallback": "Something Happened.",
+  //     "callback_id": "ComprehensionRating",
+  //     "color": "#3AA3E3",
+  //     "attachment_type": "default",
+  //     "actions": [
+  //       {
+  //         "name": "I Get It",
+  //         "text": "I get it!",
+  //         "type": "button",
+  //         "value": "iGetIt"
+  //       },
+  //       {
+  //         "name": "I Don't Get It",
+  //         "text": "What?",
+  //         "type": "button",
+  //         "value": "iDontGetIt"
+  //       }
+  //     ]
+  //   }
+  //   ]
+  // });
 });
 
 router.post('/timer', function (req, res, next) {
