@@ -7,7 +7,7 @@ let slack = require('../controllers/messages');
 /* GET home page. */
 router.post('/', function (req, res, next) {
   console.log(req.headers);
-  console.log(req.body);
+  console.log(JSON.stringify(req.body, null, 2));
 
   res.status(200).send({ "challenge": req.body.challenge });
 });
@@ -60,7 +60,7 @@ let responses = [0,0];
 
 router.post('/actions', function (req, res, next) {
   console.log(req.headers);
-  console.log(req.body);
+  console.log(JSON.stringify(req.body, null, 2));
 
   let action = req.body.payload.actions[0].name;
   console.log("action", action);
