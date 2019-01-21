@@ -63,7 +63,7 @@ router.post('/actions', function (req, res, next) {
   console.log(req.body);
 
   let action = req.body.payload.actions[0].name;
-
+  console.log("action", action);
   switch (action) {
     case "I Get It":
       responses[0]++;
