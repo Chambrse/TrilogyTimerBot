@@ -56,17 +56,70 @@ router.post('/iGetIt', function (req, res, next) {
 
 });
 
+let responses = [0,0];
+
 router.post('/actions', function (req, res, next) {
   console.log(req.headers);
   console.log(req.body);
 
   let action = req.body.payload.actions[0].name;
-  let prevMsg = JSON.parse(req.body.payload.original_message);
 
   switch (action) {
     case "I Get It":
-      prevMsg.text = "i changed the text";
-      res.status(200).send(prevMsg);
+      responses[0]++;
+      res.status(200).send({
+          "text": "Please rate your comprehension of this topic.",
+          "attachments": [
+          {
+            "fallback": "Something Happened.",
+            "callback_id": "ComprehensionRating",
+            "color": "#3AA3E3",
+            "attachment_type": "default",
+            "actions": [
+              {
+                "name": "I Get It",
+                "text": `I get it! (${responses[0]})`,
+                "type": "button",
+                "value": "iGetIt"
+              },
+              {
+                "name": "I Don't Get It",
+                "text": `What? (${responses[1]})`,
+                "type": "button",
+                "value": "iDontGetIt"
+              }
+            ]
+          }
+          ]
+        });
+      break;
+      case "I Don\'t Get It":
+      responses[1]++;
+      res.status(200).send({
+          "text": "Please rate your comprehension of this topic.",
+          "attachments": [
+          {
+            "fallback": "Something Happened.",
+            "callback_id": "ComprehensionRating",
+            "color": "#3AA3E3",
+            "attachment_type": "default",
+            "actions": [
+              {
+                "name": "I Get It",
+                "text": `I get it! (${responses[0]})`,
+                "type": "button",
+                "value": "iGetIt"
+              },
+              {
+                "name": "I Don't Get It",
+                "text": `What? (${responses[1]})`,
+                "type": "button",
+                "value": "iDontGetIt"
+              }
+            ]
+          }
+          ]
+        });
       break;
 
     default:
