@@ -12,7 +12,7 @@ router.post('/', function (req, res, next) {
 
 
 router.post('/iGetIt', function (req, res, next) {
-
+console.log("igetit hit");
   iGetIt.reset();
   iGetIt.startPoll(req.body.channel_id);
 
@@ -20,6 +20,7 @@ router.post('/iGetIt', function (req, res, next) {
 
 
 router.post('/actions', function (req, res, next) {
+  console.log('action hit');
   let parsed = JSON.parse(req.body.payload);
   let actionName = parsed.actions[0].name;
   let actionValue = parsed.actions[0].value;
