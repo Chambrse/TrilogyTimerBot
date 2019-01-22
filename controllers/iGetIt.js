@@ -14,7 +14,7 @@ const iGetIt = {
         this.channel = null;
     },
 
-    startPoll: function (channel, res) {
+    startPoll: function (channel, req, res) {
         this.channel = channel;
         res.status(200);
         slack.sendMessage(iGetIt_Message(this.channel, [0, 0]), function (error, response, body) {
@@ -22,7 +22,7 @@ const iGetIt = {
         });
     },
 
-    vote: function (action, userId, res) {
+    vote: function (action, userId, req, res) {
 
         switch (action) {
             case 'I Get It!':

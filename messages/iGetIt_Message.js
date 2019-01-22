@@ -1,5 +1,5 @@
 let iGetIt_Message = function (channel, responses) {
-    return {
+    return JSON.stringify({
         'channel': channel,
         'as_user': 'false',
         'username': 'Trilogy',
@@ -26,7 +26,7 @@ let iGetIt_Message = function (channel, responses) {
                 ]
             }
         ]
-    };
+    });
 };
 
 module.exports = iGetIt_Message;
