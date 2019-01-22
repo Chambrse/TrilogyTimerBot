@@ -61,8 +61,9 @@ let responses = [0,0];
 router.post('/actions', function (req, res, next) {
   console.log(req.headers);
   console.log(JSON.stringify(req.body, null, 2));
+  let parsed = JSON.parse(req.body.payload);
 
-  let action = "I Get It";
+  let action = parsed.actions[0].name;
   console.log("action", action);
   switch (action) {
     case "I Get It":
