@@ -40,5 +40,4 @@ function sendUpdate(channel, text, timestamp, cb) {
 module.exports = {
     sendMessage: sendMessage,
     sendUpdate: sendUpdate,
-    sendMessageNew: sendMessageNew
 }
