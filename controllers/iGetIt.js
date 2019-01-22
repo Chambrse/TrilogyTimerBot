@@ -38,7 +38,7 @@ const iGetIt = {
 
         
         if (!this.usersResponded.includes(userId)) {
-            res.status(200).send(iGetIt_Message(this.channel, this.responses));
+            res.status(200).send(JSON.parse(iGetIt_Message(this.channel, this.responses)));
             // slack.sendMessage(iGetIt_Message(this.channel, this.responses), function (error, response, body) {
             //     this.pollId = JSON.parse(body, null, 2).ts;
             // });
