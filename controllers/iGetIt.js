@@ -37,10 +37,14 @@ const iGetIt = {
 
         
         if (!this.usersResponded.includes(userId)) {
-            slack.sendMessage(iGetIt_Message(this.channel, this.responses), function (error, response, body) {
-                this.pollId = JSON.parse(body, null, 2).ts;
-            });
+            res.status(200).send(iGetIt_Message(this.channel, this.responses));
+            // slack.sendMessage(iGetIt_Message(this.channel, this.responses), function (error, response, body) {
+            //     this.pollId = JSON.parse(body, null, 2).ts;
+            // });
+        } else {
+            res.status(200);
         }
+
 
         this.usersResponded.push(userId);
     }
