@@ -1,27 +1,6 @@
 var request = require('request');
 
-function sendMessage(channel, text, cb) {
-    let body = JSON.stringify({
-        'channel': channel,
-        'text': text,
-        'as_user': 'false',
-        'username': 'Trilogy_Timer'
-    });
-
-    var options = {
-        url: 'https://slack.com/api/chat.postMessage',
-        method: "POST",
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${process.env.SLACK_TOKEN}`
-        },
-        body: body
-    };
-
-    request.post(options, cb);
-}
-
-function sendMessageNew( body, cb) {
+function sendMessage(body, cb) {
 
     var options = {
         url: 'https://slack.com/api/chat.postMessage',
