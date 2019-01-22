@@ -17,7 +17,7 @@ router.post('/iGetIt', function (req, res, next) {
   let body = JSON.stringify({
     'channel': req.body.channel_id,
     'as_user': 'false',
-    'username': 'Trilogy_Timer',
+    'username': 'Trilogy',
     "text": "Please rate your comprehension of this topic.",
     "attachments": [
       {
