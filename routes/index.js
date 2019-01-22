@@ -62,10 +62,11 @@ router.post('/actions', function (req, res, next) {
   console.log(req.headers);
   console.log(JSON.stringify(req.body, null, 2));
 
-  let action = req.body.payload.actions[0].name;
+  let action = req.body.payload.actions[0].name || "I Get It";
   console.log("action", action);
   switch (action) {
     case "I Get It":
+    console.log("inside i get it");
       responses[0]++;
       res.status(200).send({
           "text": "Please rate your comprehension of this topic.",
