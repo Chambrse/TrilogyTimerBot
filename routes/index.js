@@ -14,7 +14,7 @@ router.post('/', function (req, res, next) {
 router.post('/iGetIt', function (req, res, next) {
 console.log("igetit hit");
   iGetIt.reset();
-  iGetIt.startPoll(req.body.channel_id);
+  iGetIt.startPoll(req.body.channel_id, res);
 
 });
 
@@ -28,7 +28,7 @@ router.post('/actions', function (req, res, next) {
 
   switch (actionName) {
     case "iGetIt":
-        iGetIt.vote(actionValue, username);
+        iGetIt.vote(actionValue, username, res);
       break;
   
     default:

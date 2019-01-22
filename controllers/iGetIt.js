@@ -14,14 +14,15 @@ const iGetIt = {
         this.channel = null;
     },
 
-    startPoll: function (channel) {
+    startPoll: function (channel, res) {
         this.channel = channel;
+        res.status(200);
         slack.sendMessage(iGetIt_Message(this.channel, [0, 0]), function (error, response, body) {
             this.pollId = JSON.parse(body, null, 2).ts;
         });
     },
 
-    vote: function (action, userId) {
+    vote: function (action, userId, res) {
 
         switch (action) {
             case 'I Get It!':
