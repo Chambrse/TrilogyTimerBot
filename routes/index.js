@@ -51,7 +51,7 @@ router.post('/actions', function (req, res, next) {
       break;
 
     default:
-        res.status(200);
+        res.status(200).send();
       break;
   }
 
