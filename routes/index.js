@@ -11,7 +11,7 @@ router.post('/', function (req, res, next) {
   res.status(200).send({ "challenge": req.body.challenge });
 });
 
-
+//Slash Commands
 router.post('/iGetIt', function (req, res, next) {
   console.log("igetit hit");
   iGetIt.reset();
@@ -20,28 +20,6 @@ router.post('/iGetIt', function (req, res, next) {
 
 router.post('/trilogy', function (req, res, next) {
   res.status(200).send(JSON.parse(trilogy_Message(null)));
-});
-
-router.post('/actions', function (req, res, next) {
-  console.log('action hit');
-  let parsed = JSON.parse(req.body.payload);
-  let actionName = parsed.actions[0].name;
-  let actionValue = parsed.actions[0].value;
-  let username = parsed.user.id;
-
-  switch (actionName) {
-    case "iGetIt":
-      iGetIt.vote(actionValue, username, req, res);
-      break;
-
-    default:
-      break;
-  }
-
-});
-
-router.post('/options', function (req, res, next) {
-  console.log(req.body);
 });
 
 router.post('/timer', function (req, res, next) {
@@ -55,6 +33,31 @@ router.post('/timer', function (req, res, next) {
 
   res.status(200).send({ "text": "Timer Started." });
 
+});
+
+// This endpoint is hit whenever a button is pressed or a menu item is selected
+router.post('/actions', function (req, res, next) {
+  console.log('action hit');
+  let parsed = JSON.parse(req.body.payload);
+  let actionName = parsed.actions[0].name;
+  let actionValue = parsed.actions[0].value;
+  let username = parsed.user.id;
+
+  switch (actionName) {
+    case "iGetIt":
+      iGetIt.vote(actionValue, username, req, res);
+      break;
+
+    default:
+        res.status(200);
+      break;
+  }
+
+});
+
+// For external options
+router.post('/options', function (req, res, next) {
+  console.log(req.body);
 });
 
 module.exports = router;
