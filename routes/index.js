@@ -43,6 +43,8 @@ router.post('/actions', function (req, res, next) {
   let actionValue = parsed.actions[0].value;
   let username = parsed.user.id;
 
+  console.log(actionName);
+
   switch (actionName) {
     case "iGetIt":
       iGetIt.vote(actionValue, username, req, res);
