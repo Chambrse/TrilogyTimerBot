@@ -4,6 +4,7 @@ var router = express.Router();
 let timer = require('../controllers/timer');
 let slack = require('../controllers/messages');
 let iGetIt = require('../controllers/iGetIt');
+let trilogy_Message = require('../messages/trilogy_Message');
 
 /* GET home page. */
 router.post('/', function (req, res, next) {
@@ -12,12 +13,14 @@ router.post('/', function (req, res, next) {
 
 
 router.post('/iGetIt', function (req, res, next) {
-console.log("igetit hit");
+  console.log("igetit hit");
   iGetIt.reset();
   iGetIt.startPoll(req.body.channel_id, req, res);
-
 });
 
+router.post('/trilogy', function (req, res, next) {
+  res.status(200).send(JSON.parse(trilogy_Message(null)));
+});
 
 router.post('/actions', function (req, res, next) {
   console.log('action hit');
@@ -28,13 +31,17 @@ router.post('/actions', function (req, res, next) {
 
   switch (actionName) {
     case "iGetIt":
-        iGetIt.vote(actionValue, username, req, res);
+      iGetIt.vote(actionValue, username, req, res);
       break;
-  
+
     default:
       break;
   }
 
+});
+
+router.post('/options', function (req, res, next) {
+  console.log(req.body);
 });
 
 router.post('/timer', function (req, res, next) {
